@@ -1,13 +1,16 @@
 [package]
 name = "pdctl"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Gary M. Josack <gary@byoteki.com>"]
 repository = "https://github.com/ZeroCostGoods/pdctl"
 documentation = "https://docs.rs/pdctl"
 license = "MIT OR Apache-2.0"
 description = "Command-line tool for interacting with the PagerDuty API"
 
+[dependencies]
+clap = "2.0"
+
 [dependencies.pagersduty]
-version = "0.1"
+version = "0.2"
 # Uncomment when developing against local checkout
 # path = "../pagersduty"
