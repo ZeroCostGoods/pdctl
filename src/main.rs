@@ -6,6 +6,7 @@ use std::process;
 use std::fmt;
 use std::result;
 use std::io::Write;
+use pagersduty::events::v1 as events_api;
 
 use clap::{Arg, App, SubCommand};
 
@@ -14,7 +15,7 @@ use clap::{Arg, App, SubCommand};
 pub type Result<T> = result::Result<T, Error>;
 
 
-/// Custom Error type tha
+/// Custom Error type
 #[derive(Debug)]
 pub enum Error {
     Message(String),
@@ -83,21 +84,33 @@ fn parse_args() -> clap::ArgMatches<'static> {
 }
 
 fn trigger_event(service_key: String, description: String) {
-    let response = pagersduty::events::TriggerEvent::new(
+    let response = events_api::TriggerEvent::new(
         service_key, description
     ).send();
+    match response {
+        Ok(event) => println!("Event Processed: {:#?}", event),
+        Err(error) => println!("Event Failed: {:#?}", error),
+    }
 }
 
 fn acknowledge_event(service_key: String, incident_key: String) {
-    let response = pagersduty::events::AcknowledgeEvent::new(
+    let response = events_api::AcknowledgeEvent::new(
         service_key, incident_key
     ).send();
+    match response {
+        Ok(event) => println!("Event Processed: {:#?}", event),
+        Err(error) => println!("Event Failed: {:#?}", error),
+    }
 }
 
 fn resolve_event(service_key: String, incident_key: String) {
-    let response = pagersduty::events::ResolveEvent::new(
+    let response = events_api::ResolveEvent::new(
         service_key, incident_key
     ).send();
+    match response {
+        Ok(event) => println!("Event Processed: {:#?}", event),
+        Err(error) => println!("Event Failed: {:#?}", error),
+    }
 }
 
 
